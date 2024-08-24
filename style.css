@@ -87,13 +87,21 @@ body {
 header {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .totals {
     display: flex;
     flex-direction: row;
     gap: 6px;
+    position: fixed;
+    bottom: 32px;
+    width: calc(100vw - 64px);
+    background: white;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    z-index:999;
 }
 
 .totals_container {
@@ -281,4 +289,22 @@ button {
     padding: 8px;
     border-radius: 4px;
     color: white;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
+    justify-content: center;
+}
+
+.admin-controls {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 8px;
+}
+
+.coins {
+    margin-bottom: 96px;
 }
