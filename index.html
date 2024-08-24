@@ -19,6 +19,10 @@
 <body>
     <header id="header">
         <img src="assets/logo.svg" alt="Geldtelapp logo">
+        <div class="clock">
+            <div id="date"></div>
+            <div id="clock"></div>
+        </div>
     </header>
     <section class="totals">
         <div class="totals_container bills-total">
@@ -376,10 +380,33 @@
                 pdf.text('--- EINDE RAPPORT ---', 10, 130 + (10 * $('.coins .denomination').length) + (10 * $('.bills .denomination').length));
                 pdf.save('Teloverzicht.pdf');
             });
-            
-            
     </script>
+    <script>
+        function updateTime() {
+    const now = new Date();
+    const date = now.toLocaleDateString('nl-NL', {
+        weekday: 'short',
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric'
+    });
+    const time = now.toLocaleTimeString('nl-NL', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+    });
 
+    document.getElementById('date').textContent = date;
+    document.getElementById('clock').textContent = time;
+}
+
+// Update de klok elke seconde
+setInterval(updateTime, 1000);
+
+// Toon meteen de tijd bij het laden van de pagina
+updateTime();
+
+    </script>
     
 
 </body>

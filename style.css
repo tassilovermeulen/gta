@@ -89,7 +89,8 @@ body {
 header {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
+
 }
 
 .totals {
@@ -182,7 +183,15 @@ header {
     border-radius: 8px;
     background: #D0DADD;
     height: 58px;
+    transition: transform 0.3s ease; /* Voegt een overgang toe bij transform */
+    cursor: pointer;
 }
+
+.denomination .visual:hover {
+    transform: scale(1.05); /* Vergroot de div naar 105% bij hover */
+}
+
+
 
 .ten .visual {
     background-color: #F1C1CD;
@@ -225,7 +234,14 @@ header {
     border-radius: 8px;
     background: #D0DADD;
     height: 58px;
+    transition: transform 0.3s ease; /* Voegt een overgang toe bij transform */
+    cursor: pointer;
 }
+
+.denomination .visual-coin:hover {
+    transform: scale(1.05); /* Vergroot de div naar 105% bij hover */
+}
+
 
 .denomination .visual-coin p {
     font-size: 1.75em;
@@ -274,6 +290,7 @@ header {
     border: none;
     padding: 8px;
     border-radius: 4px;
+    cursor: pointer;
 }
 
  .secondary {
@@ -296,7 +313,15 @@ button {
     gap: 4px;
     flex: 1;
     justify-content: center;
+    cursor: pointer;
+    transition: filter 0.3s ease; /* Voegt een overgang toe bij transform */
 }
+
+button:hover {
+    filter: brightness(1.75);
+    transition: filter 0.3s ease;
+}
+
 
 .admin-controls {
     display: flex;
@@ -309,6 +334,20 @@ button {
 
 .coins {
     margin-bottom: 96px;
+}
+
+#date {
+    font-size: 0.75em;
+}
+
+#clock {
+    font-weight: 700;
+}
+
+.clock {
+    padding: 16px;
+    border-radius: 4px;
+    background-color: #F5F5F5;
 }
 
 /* Dark Mode Styles */
@@ -394,5 +433,10 @@ button {
 
     .secondary img {
         filter: invert(1);
+    }
+
+    .clock {
+        background-color: #1E1E1E;
+        color: #E0E0E0;
     }
 }
