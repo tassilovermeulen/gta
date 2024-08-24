@@ -1,0 +1,200 @@
+/* CSS Reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Inter;
+}
+
+html {
+    line-height: 1.15; /* Verbeterde leesbaarheid */
+    -webkit-text-size-adjust: 100%; /* Voorkomt dat tekstgrootte in Safari wordt aangepast */
+}
+
+body {
+    margin: 0;
+}
+
+main {
+    display: block; /* Zorgt ervoor dat <main> correct werkt in oudere browsers */
+}
+
+h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+}
+
+a {
+    background-color: transparent; /* Verwijdert de achtergrondkleur van links */
+    text-decoration: none; /* Verwijdert standaard onderstreping van links */
+}
+
+img {
+    border-style: none; /* Verwijdert standaard rand rond afbeeldingen */
+}
+
+button,
+input,
+select,
+textarea {
+    margin: 0; /* Verwijdert standaard marge in sommige browsers */
+}
+
+button,
+input { /* Verwijdert standaard styling van knoppen en invoervelden */
+    overflow: visible;
+}
+
+button,
+select { /* Verwijdert standaard schaduwen van knoppen in Firefox */
+    text-transform: none;
+}
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+    -webkit-appearance: button; /* Zorgt ervoor dat knoppen correct worden weergegeven in Safari */
+}
+
+textarea {
+    overflow: auto; /* Zorgt ervoor dat textarea altijd scrollbars toont indien nodig */
+}
+
+table {
+    border-collapse: collapse; /* Verwijdert ruimte tussen tabelcellen */
+    border-spacing: 0;
+}
+
+ul,
+ol {
+    list-style: none; /* Verwijdert standaard lijststijlen */
+}
+
+/* Reset */
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    align-items: stretch;
+    row-gap: 16px;
+    padding: 32px;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.totals {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.totals_container {
+    background-color: lightgrey;
+    flex: 1;
+    border-radius: 8px;
+    padding: 12px 18px 12px 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: flex-start;
+    align-items: flex-start;
+}
+
+.totals_container h6 {
+    margin-bottom: 4px;
+}
+
+.category {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.category hr {
+    flex-grow: 1;
+    border: 0;
+    border-top: 2px solid black; /* Dikte en kleur van de lijn */
+}
+
+.bills {
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.denomination {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.denomination .visual {
+    display: inline-flex;
+    padding: 16px;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    border-radius: 8px;
+    background: #D0DADD;
+    height: 58px;
+}
+
+.ten .visual {
+    background-color: #F1C1CD;
+}
+
+.twenty .visual {
+    background-color: #C0E0F9;
+}
+
+.fifty .visual {
+    background-color: #F5DDC5;
+}
+
+.hundred .visual {
+    background-color: #DCFAC3;
+}
+
+.denomination .visual p {
+    font-size: 1.75em;
+}
+
+.denomination .visual img {
+    position: relative;
+    left: -16px;
+    top: 0;
+    height: 58px;
+    border-radius: 8px 0 0 8px;
+}
+
+.denomination .controls {
+    display: flex;
+    gap: 8px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.controls button {
+    background-color: lightgrey;
+    border: none;
+    padding: 8px;
+    border-radius: 4px;
+}

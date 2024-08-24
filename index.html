@@ -3,10 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    
+    <title>Geldtelapp</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
+    <header>
+        <img src="assets/logo.svg" alt="Geldtelapp logo">
+    </header>
+    <section class="totals">
+        <div class="totals_container bills-total">
+            <h6>Totaal biljetten</h6>
+            <p>€10,00</p>
+        </div>
+        <div class="totals_container coins-total">
+            <h6>Totaal munten</h6>
+            <p>€10,00</p>
+        </div>
+        <div class="totals_container cumulative">
+            <h6>Totaal</h6>
+            <p>€20,00</p>
+        </div>
+    </section>
+    <section class="bills">
+        <div class="category"> 
+            <h2>Biljetten</h2>
+            <hr>
+        </div>
+        <div class="container">
+            <div class="denomination five" data-denomination="5">
+                <div class="visual">
+                    <img src="./assets/EUR5-snip.png" alt="Vijf euro biljet">
+                    <p>€5</p>
+                </div>
+                <div class="controls five">
+                    <button class="reset-input"><img src="assets/trash.svg" alt="Verwijder input"></button>
+                    <button class="remove"><img src="assets/minus.svg" alt="Minder"></button>
+                    <p class="value">0</p>
+                    <button class="add"><img src="assets/plus.svg" alt="Meer"></button>
+                </div>
+            </div>
+
+            <div class="denomination ten" data-denomination="10">
+                <div class="visual">
+                    <img src="./assets/EUR10-snip.png" alt="10 euro biljet">
+                    <p>€10</p>
+                </div>
+                <div class="controls ten">
+                    <button class="reset-input"><img src="assets/trash.svg" alt="Verwijder input"></button>
+                    <button class="remove"><img src="assets/minus.svg" alt="Verwijder input"></button>
+                    <p class="value">0</p>
+                    <button class="add"><img src="assets/plus.svg" alt="Verwijder input"></button>
+                </div>
+            </div>
+
+            <div class="denomination twenty" data-denomination="20">
+                <div class="visual">
+                    <img src="./assets/EUR20-snip.png" alt="20 euro biljet">
+                    <p>€20</p>
+                </div>
+                <div class="controls twenty">
+                    <button class="reset-input"><img src="assets/trash.svg" alt="Verwijder input"></button>
+                    <button class="remove"><img src="assets/minus.svg" alt="Verwijder input"></button>
+                    <p class="value">0</p>
+                    <button class="add"><img src="assets/plus.svg" alt="Verwijder input"></button>
+                </div>
+            </div>
+
+            <div class="denomination fifty" data-denomination="50">
+                <div class="visual">
+                    <img src="./assets/EUR50-snip.png" alt="50 euro biljet">
+                    <p>€50</p>
+                </div>
+                <div class="controls fifty">
+                    <button class="reset-input"><img src="assets/trash.svg" alt="Verwijder input"></button>
+                    <button class="remove"><img src="assets/minus.svg" alt="Verwijder input"></button>
+                    <p class="value">0</p>
+                    <button class="add"><img src="assets/plus.svg" alt="Verwijder input"></button>
+                </div>
+            </div>
+
+            <div class="denomination hundred" data-denomination="100">
+                <div class="visual">
+                    <img src="./assets/EUR100-snip.png" alt="100 euro biljet">
+                    <p>€100</p>
+                </div>
+                <div class="controls hundred">
+                    <button class="reset-input"><img src="assets/trash.svg" alt="Verwijder input"></button>
+                    <button class="remove"><img src="assets/minus.svg" alt="Verwijder input"></button>
+                    <p class="value">0</p>
+                    <button class="add"><img src="assets/plus.svg" alt="Verwijder input"></button>
+                </div>
+            </div>
+
+
+        </div>
+       
+    </section>
+    <div class="coins">
+        x
+    </div>
     
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            function updateTotals() {
+                let totalBills = 0;
+                let totalCoins = 0;
+    
+                // Loop door alle biljetten en tel hun waardes op
+                $('.bills .denomination').each(function() {
+                    let denomination = parseInt($(this).data('denomination')) || 0;  // Haal de waarde van het biljet op
+                    let quantity = parseInt($(this).find('.value').text()) || 0;      // Haal het aantal op
+    
+                    totalBills += denomination * quantity;  // Tel de waarde van dit biljet op bij het totaal
+                });
+    
+                // Loop door alle munten (als je deze toevoegt)
+                $('.coins .denomination').each(function() {
+                    let denomination = parseInt($(this).data('denomination')) || 0;  // Haal de waarde van de munt op
+                    let quantity = parseInt($(this).find('.value').text()) || 0;      // Haal het aantal op
+    
+                    totalCoins += denomination * quantity;  // Tel de waarde van deze munt op bij het totaal
+                });
+    
+                // Update totaal voor biljetten en munten
+                $('.bills-total p').text('€' + totalBills.toFixed(2));
+                $('.coins-total p').text('€' + totalCoins.toFixed(2));
+    
+                // Update het cumulatieve totaal
+                let cumulativeTotal = totalBills + totalCoins;
+                $('.cumulative p').text('€' + cumulativeTotal.toFixed(2));
+    
+                // Log de huidige tussenstand naar de console
+                console.log('Totaal biljetten:', '€' + totalBills.toFixed(2));
+                console.log('Totaal munten:', '€' + totalCoins.toFixed(2));
+                console.log('Totaal (cumulatief):', '€' + cumulativeTotal.toFixed(2));
+            }
+    
+            // Functie om het aantal van een biljet of munt te verhogen/verlagen/resetten
+            function updateValue($element, increment) {
+                let $valueElement = $element.closest('.controls').find('.value');
+                let currentValue = parseInt($valueElement.text()) || 0;  // Zorg ervoor dat currentValue een getal is
+    
+                if (increment === 'reset') {
+                    currentValue = 0;
+                } else {
+                    currentValue = currentValue + increment;
+                    if (currentValue < 0) currentValue = 0; // Zorg ervoor dat de waarde niet negatief wordt
+                }
+    
+                $valueElement.text(currentValue);
+                updateTotals(); // Update de totalen na verandering
+            }
+    
+            // Event listeners voor de knoppen
+            $('.add').click(function() {
+                updateValue($(this), 1);
+            });
+    
+            $('.remove').click(function() {
+                updateValue($(this), -1);
+            });
+    
+            $('.reset-input').click(function() {
+                updateValue($(this), 'reset');
+            });
+    
+            // Initialiseer totalen bij pagina-lading
+            updateTotals();
+        });
+    </script>
+    
+
 </body>
 </html>
