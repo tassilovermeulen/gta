@@ -97,7 +97,7 @@ header {
 }
 
 .totals_container {
-    background-color: lightgrey;
+    background-color: #F5F5F5;
     flex: 1;
     border-radius: 8px;
     padding: 12px 18px 12px 18px;
@@ -106,14 +106,22 @@ header {
     justify-content: space-between;
     align-content: flex-start;
     align-items: flex-start;
+    font-style: italic;
 }
 
 .totals_container h6 {
     margin-bottom: 4px;
+    font-size: .75em;
+}
+
+.cumulative {
+    color: white !important;
+    background-color: #CC2131 !important;
 }
 
 .category {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 16px;
 }
@@ -124,7 +132,7 @@ header {
     border-top: 2px solid black; /* Dikte en kleur van de lijn */
 }
 
-.bills {
+.euro-section {
     display: flex;
     gap: 16px;
     flex-direction: column;
@@ -139,6 +147,15 @@ header {
     gap: 16px;
 }
 
+.container_two {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 16px;    
+    flex: 1;
+}
+
 .denomination {
     display: flex;
     flex: 1;
@@ -148,7 +165,7 @@ header {
 
 .denomination .visual {
     display: inline-flex;
-    padding: 16px;
+    padding: 12px;
     justify-content: space-between;
     align-items: center;
     gap: 16px;
@@ -173,6 +190,10 @@ header {
     background-color: #DCFAC3;
 }
 
+.two-hundred .visual {
+    background-color: #F5F0B2;
+}
+
 .denomination .visual p {
     font-size: 1.75em;
 }
@@ -185,6 +206,28 @@ header {
     border-radius: 8px 0 0 8px;
 }
 
+.denomination .visual-coin {
+    display: inline-flex;
+    padding: 12px;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    border-radius: 8px;
+    background: #D0DADD;
+    height: 58px;
+}
+
+.denomination .visual-coin p {
+    font-size: 1.75em;
+}
+
+.denomination .visual-coin img {
+    position: relative;
+    height: 42px;
+    border-radius: 8px 0 0 8px;
+}
+
+
 .denomination .controls {
     display: flex;
     gap: 8px;
@@ -193,8 +236,13 @@ header {
 }
 
 .controls button {
-    background-color: lightgrey;
+    background-color: #2C2C2C;
     border: none;
     padding: 8px;
     border-radius: 4px;
+}
+
+ .secondary {
+    background-color: white !important;
+    border: 1px solid #D9D9D9 !important;
 }
