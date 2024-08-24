@@ -74,6 +74,8 @@ ol {
 }
 
 /* Reset */
+/* Standaard licht thema stijlen */
+
 
 body {
     display: flex;
@@ -307,4 +309,90 @@ button {
 
 .coins {
     margin-bottom: 96px;
+}
+
+/* Dark Mode Styles */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #121212;
+        color: #E0E0E0;
+    }
+
+    .totals {
+        background-color: #1E1E1E;
+        color: #E0E0E0;
+        box-shadow: rgba(0, 0, 0, 0.7) 0px 8px 24px;
+    }
+
+    .totals_container {
+        background-color: #333333;
+        color: #E0E0E0;
+    }
+
+    .cumulative {
+        background-color: #CC2131;
+        color: #FFFFFF !important;
+    }
+
+    .category hr {
+        border-top: 2px solid #444444;
+    }
+
+    .denomination .visual {
+        background-color: #444444;
+    }
+
+    .ten .visual {
+        background-color: #8C3B47;
+    }
+
+    .twenty .visual {
+        background-color: #385775;
+    }
+
+    .fifty .visual {
+        background-color: #775637;
+    }
+
+    .hundred .visual {
+        background-color: #5A7340;
+    }
+
+    .two-hundred .visual {
+        background-color: #726C29;
+    }
+
+    .denomination .visual-coin {
+        background-color: #444444;
+    }
+
+    .five-cent .visual-coin {
+        background-color: #775D4B;
+    }
+
+    .ten-cent .visual-coin,
+    .twenty-cent .visual-coin,
+    .fifty-cent .visual-coin,
+    .one-eur-coin .visual-coin {
+        background-color: #746A4A;
+    }
+
+    .two-eur-coin .visual-coin {
+        background-color: #6E645D;
+    }
+
+    .controls button,
+    button {
+        background-color: #333333;
+        color: #FFFFFF;
+    }
+
+    .secondary {
+        background-color: #1E1E1E !important;
+        border: 1px solid #444444 !important;
+    }
+
+    .secondary img {
+        filter: invert(1);
+    }
 }
