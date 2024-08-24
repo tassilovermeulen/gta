@@ -350,6 +350,10 @@ button:hover {
     background-color: #F5F5F5;
 }
 
+#footnote {
+    font-size: .75em;
+}
+
 /* Dark Mode Styles */
 @media (prefers-color-scheme: dark) {
     body {
