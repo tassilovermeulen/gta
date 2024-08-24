@@ -2,15 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Geldtelapp GH</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
-    <header>
+    <header id="header">
         <img src="assets/logo.svg" alt="Geldtelapp logo">
     </header>
     <section class="totals">
@@ -24,7 +27,7 @@
         </div>
         <div class="totals_container cumulative">
             <h6>Totaal</h6>
-            <p>€20,00</p>
+            <p id="pdf-cumulative-total">€20,00</p>
         </div>
     </section>
     <section class="euro-section bills">
@@ -213,6 +216,27 @@
         </div>
        
     </section>
+    <section class="pdf-section">
+        <button id="generate-pdf">Teloverzicht opslaan als PDF</button>
+        <button id="reset-all-values">Reset Alle Waarden</button>
+    </section>
+    <div id="pdf-content">
+        <header>
+            <img src="assets/logo.svg" alt="Geldtelapp logo" style="width: 100px;">
+        </header>
+        <section class="pdf-totals">
+            <h2>Teloverzicht</h2>
+            <p id="pdf-date-time"></p>
+            <h3>Biljetten</h3>
+            <div id="pdf-bills-details"></div>
+            <h3>Munten</h3>
+            <div id="pdf-coins-details"></div>
+            
+            <p>--- EINDE RAPPORT ---</p>
+        </section>
+    </div>
+    <section class="reset-section">
+    </section>
     
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -281,11 +305,77 @@
             $('.reset-input').click(function() {
                 updateValue($(this), 'reset');
             });
+
+            $('#reset-all-values').click(function() {
+                $('.denomination .value').text('0'); // Reset alle waarden naar 0
+                updateTotals(); // Werk de totalen bij na reset
+            });
+
+            //Visueel toevoegen
+            $('.visual').click(function() {
+            let $denomination = $(this).closest('.denomination');
+            updateValue($denomination.find('.add'), 1);
+            });
+
+            $('.visual-coin').click(function() {
+            let $denomination = $(this).closest('.denomination');
+            updateValue($denomination.find('.add'), 1);
+            });
+
     
             // Initialiseer totalen bij pagina-lading
             updateTotals();
         });
+
+        // Functie om de PDF te genereren
+        $('#generate-pdf').click(function() {
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF();
+                
+                // Voeg de titel en datum toe
+                pdf.setFontSize(18);
+                pdf.setFont('Courier')
+                pdf.text('GELDTELAPP - TELRAPPORT', 10, 10);
+                pdf.setFontSize(12);
+                pdf.text('DATUM VAN AFDRUK: ' + new Date().toLocaleString(), 10, 20);
+                pdf.text('--- BEGIN RAPPORT ---', 10, 30);
+                
+                // Voeg de biljetten toe
+                pdf.setFontSize(14);
+                pdf.text('BILJETTEN', 10, 40);
+                pdf.setFontSize(12);
+                $('.bills .denomination').each(function(index) {
+                    let denomination = $(this).find('.visual p').text();
+                    let quantity = $(this).find('.value').text();
+                    if (parseInt(quantity) > 0) {
+                        pdf.text(`${denomination} ${quantity}x`, 10, 50 + (10 * index));
+                    }
+                });
+
+                // Voeg de munten toe
+                pdf.setFontSize(14);
+                pdf.text('MUNTEN', 10, 60 + (10 * $('.bills .denomination').length));
+                pdf.setFontSize(12);
+                $('.coins .denomination').each(function(index) {
+                    let denomination = $(this).find('.visual-coin p').text();
+                    let quantity = $(this).find('.value').text();
+                    if (parseInt(quantity) > 0) {
+                        pdf.text(`${denomination} ${quantity}x`, 10, 70 + (10 * index) + (10 * $('.bills .denomination').length));
+                    }
+                });
+                pdf.setFontSize(14);
+                pdf.text('-------------------------', 10, 80 + (10 * $('.coins .denomination').length) + (10 * $('.bills .denomination').length));
+                pdf.text('Biljetten: ' + $('.bills-total p').text(), 10, 90 + (10 * $('.coins .denomination').length) + (10 * $('.bills .denomination').length));
+                pdf.text('Munten: ' + $('.coins-total p').text(), 10, 100 + (10 * $('.coins .denomination').length) + (10 * $('.bills .denomination').length));
+                pdf.text('TOTAAL: ' + $('.cumulative p').text(), 10, 110 + (10 * $('.coins .denomination').length) + (10 * $('.bills .denomination').length));
+                // Voeg eind rapport toe
+                pdf.text('--- EINDE RAPPORT ---', 10, 130 + (10 * $('.coins .denomination').length) + (10 * $('.bills .denomination').length));
+                pdf.save('Teloverzicht.pdf');
+            });
+            
+            
     </script>
+
     
 
 </body>
