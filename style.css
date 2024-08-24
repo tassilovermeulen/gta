@@ -227,6 +227,30 @@ header {
     border-radius: 8px 0 0 8px;
 }
 
+.five-cent .visual-coin {
+    background-color: #FFE6DB;
+}
+
+.ten-cent .visual-coin {
+    background-color: #FBF0C3;
+}
+
+.twenty-cent .visual-coin {
+    background-color: #FBF0C3;
+}
+
+.fifty-cent .visual-coin {
+    background-color: #FBF0C3;
+}
+
+.one-eur-coin .visual-coin {
+    background-color: #FBF0C3;
+}
+
+.two-eur-coin .visual-coin {
+    background-color: #F5F3F0;
+}
+
 
 .denomination .controls {
     display: flex;
