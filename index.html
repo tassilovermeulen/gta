@@ -289,6 +289,9 @@
             function updateValue($element, increment) {
                 let $valueElement = $element.closest('.controls').find('.value');
                 let currentValue = parseInt($valueElement.text()) || 0;  // Zorg ervoor dat currentValue een getal is
+                let confirmAudio = new Audio('./assets/confirm.wav');
+
+
     
                 if (increment === 'reset') {
                     currentValue = 0;
@@ -303,7 +306,10 @@
     
             // Event listeners voor de knoppen
             $('.add').click(function() {
+                let clickAudio = new Audio('./assets/click.wav');
                 updateValue($(this), 1);
+                clickAudio.load();
+                clickAudio.play();
             });
     
             $('.remove').click(function() {
@@ -312,22 +318,34 @@
     
             $('.reset-input').click(function() {
                 updateValue($(this), 'reset');
+                let confirmAudio = new Audio('./assets/confirm.wav');
+                confirmAudio.load();
+                confirmAudio.play();
             });
 
             $('#reset-all-values').click(function() {
                 $('.denomination .value').text('0'); // Reset alle waarden naar 0
                 updateTotals(); // Werk de totalen bij na reset
+                let confirmAudio = new Audio('./assets/confirm.wav');
+                confirmAudio.load();
+                confirmAudio.play();
             });
 
             //Visueel toevoegen
             $('.visual').click(function() {
             let $denomination = $(this).closest('.denomination');
             updateValue($denomination.find('.add'), 1);
+            let clickAudio = new Audio('./assets/click.wav');
+            clickAudio.load();
+            clickAudio.play();
             });
 
             $('.visual-coin').click(function() {
             let $denomination = $(this).closest('.denomination');
             updateValue($denomination.find('.add'), 1);
+            let clickAudio = new Audio('./assets/click.wav');
+            clickAudio.load();
+            clickAudio.play();
             });
 
     
