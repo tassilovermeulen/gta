@@ -9,75 +9,12 @@
 }
 
 html {
-    line-height: 1.15; /* Verbeterde leesbaarheid */
-    -webkit-text-size-adjust: 100%; /* Voorkomt dat tekstgrootte in Safari wordt aangepast */
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
 }
 
 body {
     margin: 0;
-}
-
-main {
-    display: block; /* Zorgt ervoor dat <main> correct werkt in oudere browsers */
-}
-
-h1 {
-    font-size: 2em;
-    margin: 0.67em 0;
-}
-
-a {
-    background-color: transparent; /* Verwijdert de achtergrondkleur van links */
-    text-decoration: none; /* Verwijdert standaard onderstreping van links */
-}
-
-img {
-    border-style: none; /* Verwijdert standaard rand rond afbeeldingen */
-}
-
-button,
-input,
-select,
-textarea {
-    margin: 0; /* Verwijdert standaard marge in sommige browsers */
-}
-
-button,
-input { /* Verwijdert standaard styling van knoppen en invoervelden */
-    overflow: visible;
-}
-
-button,
-select { /* Verwijdert standaard schaduwen van knoppen in Firefox */
-    text-transform: none;
-}
-
-button,
-[type="button"],
-[type="reset"],
-[type="submit"] {
-    -webkit-appearance: button; /* Zorgt ervoor dat knoppen correct worden weergegeven in Safari */
-}
-
-textarea {
-    overflow: auto; /* Zorgt ervoor dat textarea altijd scrollbars toont indien nodig */
-}
-
-table {
-    border-collapse: collapse; /* Verwijdert ruimte tussen tabelcellen */
-    border-spacing: 0;
-}
-
-ul,
-ol {
-    list-style: none; /* Verwijdert standaard lijststijlen */
-}
-
-/* Reset */
-/* Standaard licht thema stijlen */
-
-
-body {
     display: flex;
     flex-direction: column;
     align-content: space-around;
@@ -86,11 +23,68 @@ body {
     padding: 32px;
 }
 
+main {
+    display: block;
+}
+
+h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+}
+
+a {
+    background-color: transparent;
+    text-decoration: none;
+}
+
+img {
+    border-style: none;
+}
+
+button,
+input,
+select,
+textarea {
+    margin: 0;
+}
+
+button,
+input {
+    overflow: visible;
+}
+
+button,
+select {
+    text-transform: none;
+}
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+    -webkit-appearance: button;
+}
+
+textarea {
+    overflow: auto;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+/* Layout and Styling */
+
 header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
 }
 
 .totals {
@@ -104,25 +98,24 @@ header {
     padding: 16px;
     border-radius: 8px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    z-index:999;
+    z-index: 999;
 }
 
 .totals_container {
     background-color: #F5F5F5;
     flex: 1;
     border-radius: 8px;
-    padding: 12px 18px 12px 18px;
+    padding: 12px 18px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-content: flex-start;
     align-items: flex-start;
     font-style: italic;
 }
 
 .totals_container h6 {
     margin-bottom: 4px;
-    font-size: .75em;
+    font-size: 0.75em;
 }
 
 .cumulative {
@@ -140,7 +133,7 @@ header {
 .category hr {
     flex-grow: 1;
     border: 0;
-    border-top: 2px solid black; /* Dikte en kleur van de lijn */
+    border-top: 2px solid black;
 }
 
 .euro-section {
@@ -163,7 +156,7 @@ header {
     flex-wrap: nowrap;
     justify-content: space-between;
     flex-direction: row;
-    gap: 16px;    
+    gap: 16px;
     flex: 1;
 }
 
@@ -174,7 +167,8 @@ header {
     gap: 8px;
 }
 
-.denomination .visual {
+.denomination .visual,
+.denomination .visual-coin {
     display: inline-flex;
     padding: 12px;
     justify-content: space-between;
@@ -183,15 +177,47 @@ header {
     border-radius: 8px;
     background: #D0DADD;
     height: 58px;
-    transition: transform 0.3s ease; /* Voegt een overgang toe bij transform */
+    transition: transform 0.3s ease;
     cursor: pointer;
 }
 
-.denomination .visual:hover {
-    transform: scale(1.05); /* Vergroot de div naar 105% bij hover */
+.denomination .visual:hover,
+.denomination .visual-coin:hover {
+    transform: scale(1.05);
 }
 
+.denomination .visual p,
+.denomination .visual-coin p {
+    font-size: 1.5em;
+}
 
+.denomination-view {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    flex-wrap: nowrap;
+}
+
+.denomination-total {
+    font-size: 0.75em !important;
+}
+
+.denomination .visual img,
+.denomination .visual-coin img {
+    position: relative;
+    border-radius: 8px 0 0 8px;
+}
+
+.denomination .visual img {
+    left: -16px;
+    height: 58px;
+}
+
+.denomination .visual-coin img {
+    height: 42px;
+}
+
+/* Denomination Colors */
 
 .ten .visual {
     background-color: #F1C1CD;
@@ -213,62 +239,10 @@ header {
     background-color: #F5F0B2;
 }
 
-.denomination .visual p {
-    font-size: 1.75em;
-}
-
-.denomination .visual img {
-    position: relative;
-    left: -16px;
-    top: 0;
-    height: 58px;
-    border-radius: 8px 0 0 8px;
-}
-
-.denomination .visual-coin {
-    display: inline-flex;
-    padding: 12px;
-    justify-content: space-between;
-    align-items: center;
-    gap: 16px;
-    border-radius: 8px;
-    background: #D0DADD;
-    height: 58px;
-    transition: transform 0.3s ease; /* Voegt een overgang toe bij transform */
-    cursor: pointer;
-}
-
-.denomination .visual-coin:hover {
-    transform: scale(1.05); /* Vergroot de div naar 105% bij hover */
-}
-
-
-.denomination .visual-coin p {
-    font-size: 1.75em;
-}
-
-.denomination .visual-coin img {
-    position: relative;
-    height: 42px;
-    border-radius: 8px 0 0 8px;
-}
-
-.five-cent .visual-coin {
-    background-color: #FFE6DB;
-}
-
-.ten-cent .visual-coin {
-    background-color: #FBF0C3;
-}
-
-.twenty-cent .visual-coin {
-    background-color: #FBF0C3;
-}
-
-.fifty-cent .visual-coin {
-    background-color: #FBF0C3;
-}
-
+.five-cent .visual-coin,
+.ten-cent .visual-coin,
+.twenty-cent .visual-coin,
+.fifty-cent .visual-coin,
 .one-eur-coin .visual-coin {
     background-color: #FBF0C3;
 }
@@ -277,59 +251,43 @@ header {
     background-color: #F5F3F0;
 }
 
+/* Controls Styling */
 
-.denomination .controls {
+.denomination .controls,
+.admin-controls {
     display: flex;
     gap: 8px;
     justify-content: space-between;
     align-items: center;
 }
 
-.controls button {
-    background-color: #2C2C2C;
-    border: none;
-    padding: 8px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
- .secondary {
-    background-color: white !important;
-    border: 1px solid #D9D9D9 !important;
-}
-
-#pdf-content {
-    display: none;
-}
-
+.controls button,
 button {
     background-color: #2C2C2C;
     border: none;
     padding: 8px;
     border-radius: 4px;
+    cursor: pointer;
+    transition: filter 0.3s ease;
     color: white;
     display: flex;
     align-items: center;
     gap: 4px;
     flex: 1;
     justify-content: center;
-    cursor: pointer;
-    transition: filter 0.3s ease; /* Voegt een overgang toe bij transform */
 }
 
 button:hover {
     filter: brightness(1.75);
-    transition: filter 0.3s ease;
 }
 
+.secondary {
+    background-color: white !important;
+    border: 1px solid #D9D9D9 !important;
+}
 
-.admin-controls {
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-items: stretch;
-    gap: 8px;
+#pdf-content {
+    display: none;
 }
 
 .coins {
@@ -351,10 +309,22 @@ button:hover {
 }
 
 #footnote {
-    font-size: .75em;
+    font-size: 0.75em;
+}
+
+.value {
+    flex: 1;
+    display: block;
+    border: none;
+    border-bottom: 1px solid;
+    padding: 0 0 2px 0;
+    width: 10%;
+    text-align: center;
+    font-size: 1.25em;
 }
 
 /* Dark Mode Styles */
+
 @media (prefers-color-scheme: dark) {
     body {
         background-color: #121212;
@@ -381,7 +351,8 @@ button:hover {
         border-top: 2px solid #444444;
     }
 
-    .denomination .visual {
+    .denomination .visual,
+    .denomination .visual-coin {
         background-color: #444444;
     }
 
@@ -403,10 +374,6 @@ button:hover {
 
     .two-hundred .visual {
         background-color: #726C29;
-    }
-
-    .denomination .visual-coin {
-        background-color: #444444;
     }
 
     .five-cent .visual-coin {
