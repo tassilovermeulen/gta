@@ -410,4 +410,10 @@ button:hover {
         background-color: #1E1E1E;
         color: #E0E0E0;
     }
+
+    .value {
+        background-color: #333333;
+        color: #E0E0E0;
+        border-bottom: 1px solid #444444;
+    }
 }
