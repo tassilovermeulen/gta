@@ -26,11 +26,11 @@
     </header>
     <section class="totals">
         <div class="totals_container bills-total">
-            <h6>Biljetten €</h6>
+            <h6>Biljetten</h6>
             <p>€10,00</p>
         </div>
         <div class="totals_container coins-total">
-            <h6>Munten €</h6>
+            <h6>Munten</h6>
             <p>€10,00</p>
         </div>
         <div class="totals_container cumulative">
@@ -41,7 +41,6 @@
     <section class="admin-controls">
         <button id="generate-pdf"><img src="assets/pdf.svg" alt="Herstel">Rapport (PDF)</button>
         <button id="reset-all-values"><img src="assets/reset.svg" alt="Herstel">Herstel naar nul</button>
-        <button id="calculate-till-100">Bereken lade *TEST*</button>
     </section>
     <section class="euro-section bills">
         <div class="category"> 
@@ -264,24 +263,6 @@
 
         </div>
        <p id="footnote">Met liefde gemaakt door Tassilo, gebruik van applicatie en calculatie op eigen risico.</p>
-       <div id="advice-modal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Ladeadvies</h2>
-            <h4>+++ Functie niet compleet getest! +++</h4>
-            <p id="advice-text"></p>
-            <table id="advice-table">
-                <thead>
-                    <tr>
-                        <th>Coupure</th>
-                        <th>Aantal</th>
-                    </tr>
-                </thead>
-                <tbody id="advice-body">
-                </tbody>
-            </table>
-        </div>
-    </div>
     </section>
     <div id="pdf-content">
         <header>
@@ -301,6 +282,7 @@
     <section class="reset-section">
     </section>
     
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
        $(document).ready(function() {
@@ -493,143 +475,9 @@ setInterval(updateTime, 1000);
 
 // Toon meteen de tijd bij het laden van de pagina
 updateTime();
-</script>
-<script>
-document.getElementById('calculate-till-100').addEventListener('click', calculateTill100);
 
-function getCurrentCount() {
-    const denominations = document.querySelectorAll('.denomination');
-    const counts = { coins: {}, banknotes: {} };
-
-    denominations.forEach(denomination => {
-        const value = parseFloat(denomination.getAttribute('data-denomination'));
-        const amount = parseInt(denomination.querySelector('.value').value || 0);
-
-        // Munten en bankbiljetten indelen
-        if (value < 5) {
-            counts.coins[value] = amount;
-        } else {
-            counts.banknotes[value] = amount;
-        }
-    });
-
-    return counts;
-}
-
-function calculateTill100() {
-    const counts = getCurrentCount();
-    let totalCoins = 0;
-    let total = 0;
-    const coinMap = { ...counts.coins }; // Kopie van munten
-    const noteMap = { ...counts.banknotes }; // Kopie van bankbiljetten
-
-    // Munten optellen en groeperen
-    Object.keys(counts.coins).forEach(coinValue => {
-        const value = parseFloat(coinValue);
-        const amount = counts.coins[coinValue];
-        totalCoins += value * amount;
-    });
-
-    // Munten afronden naar dichtstbijzijnde veelvoud van 5
-    const remainder = totalCoins % 5;
-    if (remainder !== 0) {
-        totalCoins -= remainder;
-    }
-
-    // Voeg het afgeronde muntenbedrag toe aan het totaal
-    total += totalCoins;
-
-    // Bankbiljetten optellen en groeperen
-    Object.keys(counts.banknotes).forEach(noteValue => {
-        const value = parseFloat(noteValue);
-        const amount = counts.banknotes[noteValue];
-        total += value * amount;
-    });
-
-    // Bepalen wat er gedaan moet worden om tot 100 euro te komen
-    let advice = `Verwijder munten tot dit bedrag: €${totalCoins}. `;
-    const adviceBody = document.getElementById('advice-body');
-    adviceBody.innerHTML = ''; // Clear previous content
-
-    if (total < 100) {
-        let needed = 100 - total;
-        advice += `Voeg €${needed} toe aan de lade met de volgende biljetten: `;
-
-        // Voeg biljetten toe om het benodigde bedrag te bereiken
-        Object.keys(noteMap).sort((a, b) => a - b).forEach(noteValue => {
-            const value = parseFloat(noteValue);
-            let amountAvailable = noteMap[value];
-            while (needed >= value && amountAvailable > 0) {
-                advice += `€${value}, `;
-                needed -= value;
-                amountAvailable -= 1;
-                addRowToTable(value, 1);
-            }
-        });
-
-        if (needed > 0) {
-            advice += `Je hebt nog €${needed} extra biljetten nodig.`;
-        }
-
-    } else if (total > 100) {
-        let excess = total - 100;
-        advice += `Verwijder €${excess} uit de lade met de volgende biljetten: `;
-
-        // Verwijder biljetten om het overschot te verminderen
-        Object.keys(noteMap).sort((a, b) => b - a).forEach(noteValue => {
-            const value = parseFloat(noteValue);
-            let amountAvailable = noteMap[value];
-            while (excess >= value && amountAvailable > 0) {
-                advice += `€${value}, `;
-                excess -= value;
-                amountAvailable -= 1;
-                addRowToTable(value, 1);
-            }
-        });
-
-        if (excess > 0) {
-            advice += `Je moet nog €${excess} aan munten of biljetten verwijderen.`;
-        }
-    } else {
-        advice += "De lade bevat exact €100.";
-    }
-
-    // Toon modal met advies
-    document.getElementById('advice-text').textContent = advice;
-    document.getElementById('advice-modal').style.display = 'block';
-}
-
-// Helper functie om rijen toe te voegen aan de tabel
-function addRowToTable(value, amount) {
-    const tableBody = document.getElementById('advice-body');
-    let row = tableBody.querySelector(`tr[data-value="${value}"]`);
-    if (!row) {
-        row = document.createElement('tr');
-        row.setAttribute('data-value', value);
-        const cell1 = document.createElement('td');
-        const cell2 = document.createElement('td');
-
-        cell1.textContent = `€${value}`;
-        row.appendChild(cell1);
-        row.appendChild(cell2);
-        tableBody.appendChild(row);
-    }
-    row.querySelector('td:nth-child(2)').textContent = (parseInt(row.querySelector('td:nth-child(2)').textContent) || 0) + amount;
-}
-
-// Sluit de modal
-document.querySelector('.modal .close').addEventListener('click', function() {
-    document.getElementById('advice-modal').style.display = 'none';
-});
-
-// Sluit de modal als je buiten de modal klikt
-window.addEventListener('click', function(event) {
-    if (event.target === document.getElementById('advice-modal')) {
-        document.getElementById('advice-modal').style.display = 'none';
-    }
-});
-
-</script>    
+    </script>
+    
 
 </body>
 </html>
