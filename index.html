@@ -17,8 +17,12 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
 <body>
+
     <header id="header">
-        <img src="assets/gta-logo.svg" alt="Geldtelapp logo">
+        <div class="logo">
+            <img src="assets/gta-logo.svg" alt="Geldtelapp logo">
+            <p>v1.1 -<a href="changes.md">Changelog</a></p>
+        </div>
         <div class="clock">
             <div id="date"></div>
             <div id="clock"></div>
@@ -344,6 +348,11 @@
         updateTotals(); // Update totals after change
     }
 
+    //Empty on click
+    $('.value').click(function() {
+        $(this).val('');
+    });
+
     // Event listeners for the buttons
     $('.add').click(function() {
         let clickAudio = new Audio('./assets/click.wav');
@@ -446,8 +455,8 @@ $('#generate-pdf').click(function() {
                 pdf.text('--- EINDE RAPPORT ---', 10, 135 + (10 * $('.coins .denomination').length) + (10 * $('.bills .denomination').length));
                 pdf.setFontSize(8);
                 pdf.setFont('Courier')
-                pdf.text('GELDTELAPP 2024 - TASSILO VERMEULEN - GEBRUIK APPLICATIE, CALCULATIE EN RAPPORTAGE OP EIGEN RISICO', 10, 270);
-                pdf.save('Teloverzicht.pdf');
+                pdf.text('GELDTELAPP 2024 - GEBRUIK APPLICATIE, CALCULATIE EN RAPPORTAGE OP EIGEN RISICO', 10, 270);
+                pdf.save('Telrapport ' + new Date().toDateString() + '.pdf');
             });
     </script>
     <script>
@@ -475,8 +484,7 @@ setInterval(updateTime, 1000);
 // Toon meteen de tijd bij het laden van de pagina
 updateTime();
 
-    </script>
-    
+</script>
 
 </body>
 </html>
