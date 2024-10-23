@@ -19,20 +19,23 @@
 <body>
 
     <header id="header">
-        <div class="logo">
-            <img src="assets/TellerLogo.svg" alt="Geldtelapp logo">
-            <p>v1.2 -<a href="changes.html">Changelog</a></p>
+        <div class="top">
+            <div class="logo">
+                <img src="assets/TellerLogo.svg" alt="Geldtelapp logo">
+                <p>v1.2 -<a href="changes.html">Changelog</a></p>
+            </div>
+            <div class="clock">
+                <div id="date"></div>
+                <div id="clock"></div>
+            </div>
         </div>
+        
         <div class="admin-controls">
             <button id="generate-pdf" class="generate-pdf"><img src="assets/pdf.svg" alt="Herstel">Rapport (PDF)</button>
             <button id="reset-all-values"><img src="assets/reset.svg" alt="Herstel">Herstel naar nul</button>
             <button id="notes"><img src="assets/notitie.svg" alt="Notities">Notitie</button>
         </div>
        
-        <div class="clock">
-            <div id="date"></div>
-            <div id="clock"></div>
-        </div>
     </header>
     <section class="totals">
         <div class="totals_container bills-total">
