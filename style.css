@@ -276,7 +276,7 @@ header {
 .admin-controls {
     display: flex;
     gap: 8px;
-    justify-content: space-between;
+    justify-content: end;
     align-items: stretch;
     flex-direction: row;
 }
@@ -285,11 +285,17 @@ header {
     background-color: #F5F5F5;
     color: black;
     border: solid 1px #6d6d6d;
-    width: 12em;
+    min-width: 14em;
+    flex: 0;
 }
 
 .admin-controls button img {
     filter: invert(1);
+}
+
+#reset-all-values {
+    background: #ffecec;
+    border: 1px solid #4e0000;
 }
 
 .controls button,
@@ -301,15 +307,20 @@ button {
     cursor: pointer;
     transition: filter 0.3s ease;
     color: white;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 4px;
     flex: 1;
     justify-content: center;
+    box-sizing: border-box;
+    transition: transform 0.2s ease;
 }
 
 button:hover {
-    filter: brightness(1.75);
+    border: solid 1px rgba(0, 0, 0, 1);
+    transform: scale(1.02);
+    box-sizing: border-box;
+    transition: transform 0.2s ease;
 }
 
 .secondary {
